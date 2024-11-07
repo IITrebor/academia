@@ -21,12 +21,12 @@ class RegistroUsuarioForm(UserCreationForm):
 
     class Meta:
         model = Usuario
-        fields = ('username', 'first_name', 'last_name', 'password1', 'password2')
+        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields:
-            self.fields[field].widget.attrs = {'class': 'form-control'}
+            self.fields[field].widget.attrs.update ({'class': 'form-control'})
         self.fields['username'].label='Nombre de usuario'
         self.fields['password1'].label='Contraseña'
         self.fields['password2'].label='Confirmar contraseña'
@@ -37,7 +37,7 @@ class RegistroUsuarioForm(UserCreationForm):
 class CursoForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = Curso
-        fields = ('nombre', 'descripcion','fecha_inicio', 'fecha_fin','cupos','estado')
+        fields = ['nombre', 'descripcion', 'fecha_inicio', 'fecha_fin', 'cupos', 'estados']
         widgets = {
             'fecha_inicio': forms.DateInput(attrs={'type': 'date'}),
             'fecha_fin': forms.DateInput(attrs={'type': 'date'}),

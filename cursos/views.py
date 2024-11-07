@@ -13,13 +13,13 @@ from cursos.forms import RegistroUsuarioForm, CursoForm
 from cursos.models import Curso
 
 
-class ListaCursosViews(LoginRequiredMixin, ListView):
+class ListaCursosView(LoginRequiredMixin, ListView):
     model = Curso
     template_name = 'cursos/lista_cursos.html'
     context_object_name = 'cursos'
 
     def get_queryset(self):
-        if self.request.user.rol=='admin':
+        if self.request.user.rol =='admin':
             return Curso.objects.all()
         return Curso.objects.filter(estado=True)
 
@@ -30,7 +30,7 @@ class DetalleCursoView(LoginRequiredMixin, DetailView):
     context_object_name = 'curso'
 
 
-class InscribirseCursoView(LoginRequiredMixin, DetailView):
+class InscribirCursoView(LoginRequiredMixin, DetailView):
     model = Curso
 
     def get(self, request, *args, **kwargs ):
@@ -39,7 +39,7 @@ class InscribirseCursoView(LoginRequiredMixin, DetailView):
             curso.inscritos.add(request.user)
             messages.success(request, f'Se ha inscrito exitosamente en el curso {curso.nombre}')
         else:
-            messages.error(request, 'No se pudo realizar la inscripcion. El curso esta lleno o ya esta inscrito ')
+            messages.error(request, 'No se pudo realizar la inscripción. El curso puede estar lleno o ya está inscrito ')
         return redirect('detalle_curso',pk=curso.pk)
 
 
@@ -54,7 +54,7 @@ class CrearCursoView(LoginRequiredMixin, UserPassesTestMixin,CreateView):
     def form_valid(self, form):
         response = super().form_valid(form)
         messages.success(self.request, 'El curso se ha creado correctamente')
-        return responses
+        return response
 
 
 
@@ -70,14 +70,14 @@ class MisCursosView(LoginRequiredMixin,ListView):
 class CustomLoginView(LoginView):
     template_name = 'registro/login.html'
 
-    def form_valid(self, form):
-        messages.error(self.request, 'Usuario o contraseña incorrecta. Por favor ingrese un usuario correcto')
-        return  super().form_valid(form)
+    def form_invalid(self, form):
+        messages.error(self.request, 'Usuario o contraseña incorrectos. Por favor, ingrese nuevamente.')
+        return  super().form_invalid(form)
 
 class CustomLogoutView(View):
     def get(self, request):
         logout(request)
-        messages.success(request, 'Sesion cerrada correctamente')
+        messages.success(request, 'Sesión cerrada correctamente.')
         response = redirect('login')
         response['Cache-Control'] = 'no-cache, no-store, must-revalidate'
         response['Pragma'] = 'no-cache'
@@ -94,7 +94,7 @@ class RegistroUsuarioView(CreateView):
     def form_valid(self, form):
         response = super().form_valid(form)
         login(self.request, self.object)
-        messages.success(self.request, 'Se ha Registrado exitosamente')
+        messages.success(self.request, "Se ha registrado exitosamente.")
         return response
     def form_invalid(self, form):
         for field,errors in form.errors.items():

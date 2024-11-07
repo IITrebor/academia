@@ -4,18 +4,18 @@
     <div class="card">
     <div class="card-body">
         <h2 class="card-title">{{ curso.nombre }}</h2>
-        <p clas="card-text">{{ curso.descripcion }}</p>
+        <p class="card-text">{{ curso.descripcion }}</p>
         <ul class="list-group list-group-flush">
-            <li clas="list-group-item"><strong>Fecha inicio</strong>{{ curso.fecha_inicio }}</li>
-            <li clas="list-group-item"><strong>Fecha Fin</strong>{{ curso.fecha_fin }}</li>
-            <li clas="list-group-item"><strong>Fecha Cupos</strong>{{ curso.cupos }}</li>
-            <li clas="list-group-item"><strong>Estado</strong>{% if curso.estados %}Activo{% else %}Inactivo{% endif %}</li>
+            <li class="list-group-item"><strong>Fecha inicio</strong>{{ curso.fecha_inicio }}</li>
+            <li class="list-group-item"><strong>Fecha Fin</strong>{{ curso.fecha_fin }}</li>
+            <li class="list-group-item"><strong>Fecha Cupos</strong>{{ curso.cupos }}</li>
+            <li class="list-group-item"><strong>Estado</strong>{% if curso.estados %}Activo{% else %}Inactivo{% endif %}</li>
         </ul>
         {% if user.rol == 'normal' and curso.estados %}
             {% if user in curso.inscritos.all %}
-                <p class="at-3  text-succes">Ya estas incrito en este curso</p>
+                <p class="at-3  text-success">"Ya estás inscrito en este curso."</p>
             {% else %}
-                <a href="{% url 'inscrbir_curso' curso.apk %}" class="btn btn-primary mt-3">Inscribirse</a>
+                <a href="{% url 'inscribir_curso' curso.apk %}" class="btn btn-primary mt-3">Inscribirse</a>
             {% endif %}
         {% endif %}
         {% if user.rol == 'admin' %}
@@ -37,7 +37,7 @@
                     </tr>
                 {% empty %}
                     <tr>
-                        <td colspan="3">No hay usuario registrados en este curso</td>
+                        <td colspan="3">No hay usuarios registrados en este curso</td>
                     </tr>
                 {% endfor %}
                 </tbody>

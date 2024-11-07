@@ -1,8 +1,6 @@
 
 from django.contrib import admin
-from django.contrib.auth import logout
 from django.urls import path, include
-
 from cursos.views import CustomLoginView, CustomLogoutView
 
 urlpatterns = [

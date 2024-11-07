@@ -6,7 +6,7 @@
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Descripcion</th>
+                <th>Descripción</th>
                 <th>Fecha Inicio</th>
                 <th>Fecha Fin</th>
                 <th>Cupos</th>
@@ -22,8 +22,8 @@
                     <td>{{ curso.fecha_inicio }}</td>
                     <td>{{ curso.fecha_fin }}</td>
                     <td>{{ curso.cupos }}</td>
-                    <td>{% if curso.estados %}Activo{% else %}Inactivo{% endif %}</td>
-                    <td><a href="{% url 'detalle_curso' curso.id %}" class="btn btn-primary btn-sm">Ver detalle</a></td>
+                    <td>{% if curso.estado %}Activo{% else %}Inactivo{% endif %}</td>
+                    <td><a href="{% url 'detalle_curso' curso.pk %}" class="btn btn-primary btn-sm">Ver detalles</a></td>
                 </tr>
             {% empty %}
                 <tr>
