@@ -15,7 +15,7 @@
             {% if user in curso.inscritos.all %}
                 <p class="at-3  text-success">"Ya estás inscrito en este curso."</p>
             {% else %}
-                <a href="{% url 'inscribir_curso' curso.apk %}" class="btn btn-primary mt-3">Inscribirse</a>
+                <a href="{% url 'inscribir_curso' curso.pk %}" class="btn btn-primary mt-3">Inscribirse</a>
             {% endif %}
         {% endif %}
         {% if user.rol == 'admin' %}

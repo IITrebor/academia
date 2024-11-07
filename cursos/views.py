@@ -21,7 +21,7 @@ class ListaCursosView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         if self.request.user.rol =='admin':
             return Curso.objects.all()
-        return Curso.objects.filter(estado=True)
+        return Curso.objects.filter(estados=True)
 
 
 class DetalleCursoView(LoginRequiredMixin, DetailView):
